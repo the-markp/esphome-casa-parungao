@@ -1,0 +1,57 @@
+esphome:
+  name: son_basic_0
+  platform: ESP8266
+  board: esp01_1m
+
+  on_boot:
+    priority: 600.0
+    then:
+      - switch.turn_on: relay
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+  
+  manual_ip:
+    static_ip: 192.168.1.214
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "son_basic_0 Fallback Hotspot"
+    password: "00000000"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"
+  
+# function start
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "son_basic_0 button"
+    on_press:
+      - switch.toggle: relay
+
+switch:
+  - platform: gpio
+    name: "son_basic_0 relay"
+    pin: GPIO12
+    id: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes

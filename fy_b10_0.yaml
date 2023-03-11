@@ -1,0 +1,51 @@
+esphome:
+  name: fy_b10_0
+  platform: ESP8266
+  board: esp12e
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "fy_b10_0 Fallback Hotspot"
+    password: "00000000"
+
+  manual_ip:
+    static_ip: 192.168.1.223
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  use_address: 192.168.1.35
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"
+
+sensor:
+  - platform: integration
+    name: "water consumption"
+    sensor: flow_sensor_0
+    time_unit: min
+  - platform: pulse_counter
+    pin: GPIO5
+    name: "Main water line"
+    id: flow_sensor_0
+    update_interval: 5s
+    filters:
+    - lambda: return (x / 308.207);
+    unit_of_measurement: "L/min"
+
+# Remote restart module
+switch:
+  - platform: restart
+    name: "fy_b10_0 restart"

@@ -1,0 +1,72 @@
+esphome:
+  name: bme680_0
+  platform: ESP8266
+  board: esp12e
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+
+  manual_ip:
+    static_ip: 192.168.1.222
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  use_address: 192.168.1.23
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "bme680_0 Fallback"
+    password: "00000000"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"
+
+i2c:
+  sda: GPIO4
+  scl: GPIO5
+  scan: True
+
+bme680_bsec:
+    # i2c address override (default is 0x76)
+    address: 0x77
+
+    # Temperature offset if device is in enclosure and reads too high (default is 0)
+    temperature_offset: 2.0
+
+    # Mode for IAQ sensors if device is mobile (default is static)
+    iaq_mode: mobile
+
+    # Interval at which to save BSEC state (default is 6 hours)
+    state_save_interval: 4h
+
+sensor:
+  - platform: bme680_bsec
+    temperature:
+      name: "BME680 Temperature"
+    pressure:
+      name: "BME680 Pressure"
+    humidity:
+      name: "BME680 Humidity"
+    gas_resistance:
+      name: "BME680 Gas Resistance"
+    iaq:
+      name: "BME680 IAQ"
+    co2_equivalent:
+      name: "BME680 CO2 Equivalent"
+    breath_voc_equivalent:
+      name: "BME680 Breath VOC Equivalent"
+
+text_sensor:
+  - platform: bme680_bsec
+    iaq_accuracy:
+      name: "BME680 IAQ Accuracy"

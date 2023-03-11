@@ -1,0 +1,30 @@
+esphome:
+  name: beacon1
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+
+  manual_ip:
+    static_ip: 192.168.1.225
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Beacon1 Fallback Hotspot"
+    password: "00000000"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"

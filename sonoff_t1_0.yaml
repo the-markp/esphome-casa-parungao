@@ -1,0 +1,81 @@
+esphome:
+  name: son-t1-01
+  platform: ESP8266
+  board: esp01_1m
+  
+  # Automation turning on the blue status LED once T1 is booted up
+  on_boot:
+    priority: -10
+    then:
+      - light.turn_on: blue_led_light
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+  fast_connect: true
+
+  use_address: 192.168.1.18
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Kit Gar Fallback Hotspot"
+    password: "00000000"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Kitchen PAD"
+    on_press:
+      - switch.toggle: relay_1
+  - platform: gpio
+    pin:
+      number: GPIO9
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Garage PAD"
+    on_press:
+      - switch.toggle: relay_2
+  - platform: status
+    name: "Kit-Gar switch"
+
+switch:
+  - platform: gpio
+    name: "Kitchen LIGHT"
+    pin: GPIO12
+    id: relay_1
+    restore_mode: ALWAYS_OFF
+  - platform: gpio
+    name: "Garage LIGHT"
+    pin: GPIO5
+    id: relay_2
+    restore_mode: ALWAYS_OFF
+
+output:
+  # Register the blue LED as a dimmable output ....
+  - platform: esp8266_pwm
+    id: blue_led
+    pin: GPIO13
+    inverted: True
+
+light:
+  # ... and then make a light out of it.
+  - platform: monochromatic
+    name: "BLUE LED"
+    output: blue_led
+    internal: true
+    id: blue_led_light

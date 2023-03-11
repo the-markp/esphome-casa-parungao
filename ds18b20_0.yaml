@@ -1,0 +1,42 @@
+esphome:
+  name: ds18b20_0
+  platform: ESP8266
+  board: esp12e
+
+wifi:
+  ssid: "Fox River State Penitentiary"
+  password: "1Englishfitzpercy!"
+  fast_connect: true
+
+  manual_ip:
+    static_ip: 192.168.1.224
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+
+  #use_address: 192.168.1.38
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "ds18b20_0 Fallback"
+    password: "00000000"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: "0918"
+
+ota:
+  password: "0918"
+
+dallas:
+  - pin: GPIO2
+
+# Individual sensors
+sensor:
+  - platform: dallas
+    address: 0x360114533EC5AA28
+    name: DS18B20 Temp sensor 0
