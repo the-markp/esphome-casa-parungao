@@ -12,12 +12,12 @@ wifi:
     ssid: "fy_b10_0 Fallback Hotspot"
     password: "00000000"
 
-  manual_ip:
-    static_ip: 192.168.1.223
-    gateway: 192.168.1.1
-    subnet: 255.255.255.0
+#  manual_ip:
+#    static_ip: 192.168.1.223
+#    gateway: 192.168.1.1
+#    subnet: 255.255.255.0
 
-  use_address: 192.168.1.35
+#  use_address: 192.168.1.35
 
 captive_portal:
 
