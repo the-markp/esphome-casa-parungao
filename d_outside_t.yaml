@@ -4,8 +4,8 @@ esphome:
   board: esp01_1m
 
 wifi:
-  ssid: "Fox River State Penitentiary"
-  password: "1Englishfitzpercy!"
+  ssid: "SONA"
+  password: ".mP09190087401"
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:

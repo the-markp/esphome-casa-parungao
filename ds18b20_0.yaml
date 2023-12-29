@@ -4,8 +4,8 @@ esphome:
   board: esp12e
 
 wifi:
-  ssid: "Fox River State Penitentiary"
-  password: "1Englishfitzpercy!"
+  ssid: "SONA"
+  password: ".mP09190087401"
   fast_connect: true
 
 #  manual_ip:
